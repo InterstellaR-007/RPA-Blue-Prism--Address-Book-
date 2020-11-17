@@ -1,0 +1,49 @@
+﻿<process name="addressbookProcess" version="1.0" bpversion="6.9.0.26970" narrative="" byrefcollection="true" preferredid="e12ed5be-d66b-4f3b-8625-fbaa29873c90">
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="4523960c-3010-425d-85c5-3967c6764b51" name="Start" type="Start">
+    <display x="15" y="-165" />
+    <onsuccess>c2e7c8d5-7dc8-4f53-81e6-41ccd537918c</onsuccess>
+  </stage>
+  <stage stageid="50a84c21-e5bf-4b4e-82ee-705f9977df78" name="End" type="End">
+    <display x="15" y="165" />
+  </stage>
+  <stage stageid="a660a22c-7d8d-4cab-a191-2b7908db3a0a" name="Stage1" type="ProcessInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="c2e7c8d5-7dc8-4f53-81e6-41ccd537918c" name="AddressBookServiceProg::Insert Data in db" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-90" />
+    <onsuccess>21f5951f-04cf-493a-8b0f-48d7164ad359</onsuccess>
+    <resource object="AddressBookServiceProg" action="Insert Data in db" />
+  </stage>
+  <stage stageid="cb57e092-6522-474d-8ff0-12fca367a75a" name="AddressBookServiceProg::Check Duplicate" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="60" />
+    <onsuccess>051343a6-d964-48c9-a398-3ffe8de28b22</onsuccess>
+    <resource object="AddressBookServiceProg" action="Check Duplicate" />
+  </stage>
+  <stage stageid="21f5951f-04cf-493a-8b0f-48d7164ad359" name="AddressBookServiceProg::Read Data from db" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-45" />
+    <onsuccess>6537a8d3-c31b-484d-9591-788ae1169512</onsuccess>
+    <resource object="AddressBookServiceProg" action="Read Data from db" />
+  </stage>
+  <stage stageid="6537a8d3-c31b-484d-9591-788ae1169512" name="AddressBookServiceProg::Write to Excel" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="0" />
+    <onsuccess>cb57e092-6522-474d-8ff0-12fca367a75a</onsuccess>
+    <resource object="AddressBookServiceProg" action="Write to Excel" />
+  </stage>
+  <stage stageid="051343a6-d964-48c9-a398-3ffe8de28b22" name="AddressBookServiceProg::Alter Existing Data" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="105" />
+    <onsuccess>50a84c21-e5bf-4b4e-82ee-705f9977df78</onsuccess>
+    <resource object="AddressBookServiceProg" action="Alter Existing Data" />
+  </stage>
+</process>
