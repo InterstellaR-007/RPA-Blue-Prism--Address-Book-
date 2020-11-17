@@ -1,0 +1,87 @@
+﻿<process name="Read Data from db" version="1.0" bpversion="6.9.0.26970" narrative="" byrefcollection="true" type="object" runmode="Exclusive" preferredid="a925797e-586b-4dc6-8f9e-de49f40bcf3a">
+  <appdef>
+    <element name="Application Root">
+      <id>a5d331b1-9c03-46ce-9aac-8910a87ad148</id>
+      <type>Application</type>
+      <basetype>Application</basetype>
+      <datatype>unknown</datatype>
+      <diagnose>False</diagnose>
+    </element>
+  </appdef>
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="6035609e-aed1-4414-8113-c78068ba7ede" name="Read Data from db" type="SubSheetInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="15862c40-a357-44cd-8138-1c2f865cf32e" name="Start" type="Start">
+    <loginhibit />
+    <display x="15" y="-225" />
+    <onsuccess>b094e7f8-3cf7-4c13-93c0-2844122a3687</onsuccess>
+  </stage>
+  <stage stageid="0abe5d77-720d-4848-abb3-99ead38a9e6b" name="End" type="End">
+    <loginhibit />
+    <display x="15" y="105" />
+  </stage>
+  <stage stageid="b094e7f8-3cf7-4c13-93c0-2844122a3687" name="Data - SQL Server::Set Connection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-120" />
+    <inputs>
+      <input type="text" name="Server" friendlyname="Server" narrative="The name of the server and, if necessary, instance name of the SQL Server instance to connect to" expr="&quot;(localdb)\localdb_2&quot;" />
+      <input type="text" name="Database" friendlyname="Database" narrative="The name of the database to connect to" expr="&quot;AddressBookService&quot;" />
+      <input type="text" name="User" friendlyname="User" narrative="If appropriate, the login name to use to connect to SQL Server. If left empty, windows authentication using the current user will be used instead of SQL Server authentication" expr="" />
+      <input type="password" name="Password" friendlyname="Password" narrative="If appropriate, the password to use with the above login name to access SQL Server. Unused for windows authentication" expr="" />
+    </inputs>
+    <onsuccess>71e36200-d101-4c98-ab70-b9cc08f53cfc</onsuccess>
+    <resource object="Data - SQL Server" action="Set Connection" />
+  </stage>
+  <stage stageid="71e36200-d101-4c98-ab70-b9cc08f53cfc" name="Data - SQL Server::Get Collection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-45" />
+    <inputs>
+      <input type="text" name="SQL" friendlyname="SQL" narrative="The SQL query to use to perform this action" expr="&quot;select * from [AddressBookService].[dbo].[AddressBook]&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success_read from db" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="Message_read from db" />
+      <output type="collection" name="Results" friendlyname="Results" narrative="The collection of results from the query" stage="Results_read from db" />
+    </outputs>
+    <onsuccess>0abe5d77-720d-4848-abb3-99ead38a9e6b</onsuccess>
+    <resource object="Data - SQL Server" action="Get Collection" />
+  </stage>
+  <stage stageid="807d24d9-7087-4b57-8002-c18050c5b217" name="Success_read from db" type="Data">
+    <display x="90" y="-45" />
+    <datatype>flag</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="d05be8c6-6d5e-44f6-8285-0eb21f733101" name="Message_read from db" type="Data">
+    <display x="165" y="-45" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="f61d1b5b-4ae8-4e7a-9df9-221a3e8d5ce4" name="Results_read from db" type="Collection">
+    <loginhibit />
+    <display x="-75" y="-45" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+    <collectioninfo>
+      <field name="first_Name" type="text" />
+      <field name="last_Name" type="text" />
+      <field name="address" type="text" />
+      <field name="city" type="text" />
+      <field name="state" type="text" />
+      <field name="zip" type="text" />
+      <field name="phone_Number" type="text" />
+      <field name="email" type="text" />
+    </collectioninfo>
+  </stage>
+</process>

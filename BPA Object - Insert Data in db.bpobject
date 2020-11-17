@@ -1,0 +1,100 @@
+﻿<process name="Insert Data in db" version="1.0" bpversion="6.9.0.26970" narrative="" byrefcollection="true" type="object" runmode="Exclusive" preferredid="a925797e-586b-4dc6-8f9e-de49f40bcf3a">
+  <appdef>
+    <element name="Application Root">
+      <id>a5d331b1-9c03-46ce-9aac-8910a87ad148</id>
+      <type>Application</type>
+      <basetype>Application</basetype>
+      <datatype>unknown</datatype>
+      <diagnose>False</diagnose>
+    </element>
+  </appdef>
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="9723fcaf-3d41-43a8-a4ea-4bb15b323695" name="Insert Data in db" type="SubSheetInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="eebc2d29-cfd6-4dc2-bd0f-d2630906ed61" name="Start" type="Start">
+    <loginhibit />
+    <display x="0" y="-180" />
+    <onsuccess>e60f4464-79c2-4ea3-8de6-2be7053aaf26</onsuccess>
+  </stage>
+  <stage stageid="7426bda5-5dec-496b-9647-1add42f7ca3d" name="End" type="End">
+    <loginhibit />
+    <display x="0" y="150" />
+  </stage>
+  <stage stageid="e60f4464-79c2-4ea3-8de6-2be7053aaf26" name="Data - SQL Server::Set Connection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="0" y="-75" />
+    <inputs>
+      <input type="text" name="Server" friendlyname="Server" narrative="The name of the server and, if necessary, instance name of the SQL Server instance to connect to" expr="&quot;(localdb)\localdb_2&quot;" />
+      <input type="text" name="Database" friendlyname="Database" narrative="The name of the database to connect to" expr="&quot;AddressBookService&quot;" />
+      <input type="text" name="User" friendlyname="User" narrative="If appropriate, the login name to use to connect to SQL Server. If left empty, windows authentication using the current user will be used instead of SQL Server authentication" expr="" />
+      <input type="password" name="Password" friendlyname="Password" narrative="If appropriate, the password to use with the above login name to access SQL Server. Unused for windows authentication" expr="" />
+    </inputs>
+    <onsuccess>3212bfcf-ad68-4c93-8013-d921651d1a73</onsuccess>
+    <resource object="Data - SQL Server" action="Set Connection" />
+  </stage>
+  <stage stageid="8e4c511e-d42a-4df3-a4af-614ab84873ad" name="Data - SQL Server::Get Collection" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="0" y="60" />
+    <inputs>
+      <input type="text" name="SQL" friendlyname="SQL" narrative="The SQL query to use to perform this action" expr="&quot;select first_Name,last_Name from [AddressBookService].[dbo].[AddressBook]&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success_Insert in db" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="Message_Insert in db" />
+      <output type="collection" name="Results" friendlyname="Results" narrative="The collection of results from the query" stage="Results_Insert in db" />
+    </outputs>
+    <onsuccess>7426bda5-5dec-496b-9647-1add42f7ca3d</onsuccess>
+    <resource object="Data - SQL Server" action="Get Collection" />
+  </stage>
+  <stage stageid="b61c675c-18eb-4566-bc98-07f741da8057" name="Success_Insert in db" type="Data">
+    <display x="75" y="0" />
+    <datatype>flag</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="6e4cf575-0cfc-47e9-872c-87c7c0c40e7b" name="Message_Insert in db" type="Data">
+    <display x="150" y="0" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="3212bfcf-ad68-4c93-8013-d921651d1a73" name="Insert Data" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="0" y="0" />
+    <inputs>
+      <input type="text" name="Query" friendlyname="Query" narrative="The SQL query to use to perform this action" expr="&quot;insert into [AddressBookService].[dbo].[AddressBook](first_Name,last_Name,address,city,state,zip,phone_Number,email)&#xA; Values('anuj3','sharma3','ib35','rae','UP',229406,'8319293516','xyz@gmail.com'),&#xA; ('abram3','neigh3','ae144','rambo','IP',229408,'8319293114','abc@gmail.com')&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success_Insert in db" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="Message_Insert in db" />
+    </outputs>
+    <onsuccess>8e4c511e-d42a-4df3-a4af-614ab84873ad</onsuccess>
+    <resource object="Data - SQL Server" action="Execute" />
+  </stage>
+  <stage stageid="847eacd8-e04f-4d60-9fbc-eea5465f9067" name="Results_Insert in db" type="Collection">
+    <loginhibit />
+    <display x="-75" y="0" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+    <collectioninfo>
+      <field name="first_Name" type="text" />
+      <field name="last_Name" type="text" />
+      <field name="address" type="text" />
+      <field name="city" type="text" />
+      <field name="state" type="text" />
+      <field name="zip" type="text" />
+      <field name="phone_Number" type="text" />
+      <field name="email" type="text" />
+    </collectioninfo>
+  </stage>
+</process>
