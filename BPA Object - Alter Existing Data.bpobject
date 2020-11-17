@@ -16,7 +16,7 @@
   <preconditions />
   <endpoint narrative="" />
   <stage stageid="016c9849-b153-4e97-80ff-e15ac06ff13a" name="Alter Existing Data" type="SubSheetInfo">
-    <display x="-195" y="-105" w="150" h="90" />
+    <display x="-255" y="-105" w="150" h="90" />
   </stage>
   <stage stageid="b45fc71d-dc6f-44a1-aa7f-bbc58ba7c7e3" name="Start" type="Start">
     <loginhibit />
@@ -71,13 +71,13 @@
     <loginhibit onsuccess="true" />
     <display x="135" y="75" />
     <inputs>
-      <input type="text" name="Query" friendlyname="Query" narrative="The SQL query to use to perform this action" expr="&quot;update [AddressBookService].[dbo].[AddressBook] set address='[Results_Updated Data.address]',&#xA; city = '[Results_Updated Data.city]', state='[Results_Updated Data.state]',phone_Number ='[Results_Updated Data.phone_Number]', zip ='[Results_Updated Data.zip]', email='[Results_Updated Data.email]'&#xA; where first_Name='[Results_Updated Data.first_Name]' and last_Name = '[Results_Updated Data.last_Name]'&quot;" />
+      <input type="text" name="Query" friendlyname="Query" narrative="The SQL query to use to perform this action" expr="&quot; update [AddressBookService].[dbo].[AddressBook] set address='&quot;&amp;[Results_Updated Data.address]&amp;&quot;',&#xA; city = '&quot;&amp;[Results_Updated Data.city]&amp;&quot;', state='&quot;&amp;[Results_Updated Data.state]&amp;&quot;',phone_Number ='&quot;&amp;[Results_Updated Data.phone_Number]&amp;&quot;', zip ='&quot;&amp;[Results_Updated Data.zip]&amp;&quot;', email='&quot;&amp;[Results_Updated Data.email]&amp;&quot;'&#xA; where first_Name='&quot;&amp;[Results_Updated Data.first_Name]&amp;&quot;' and last_Name = '&quot;&amp;[Results_Updated Data.last_Name]&amp;&quot;' &quot;" />
     </inputs>
     <outputs>
       <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success_Updation" />
       <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="Message_Updation" />
     </outputs>
-    <onsuccess>0fa6735c-7596-4ca8-896e-2c10da6209fd</onsuccess>
+    <onsuccess>bcd8badd-c7b2-490a-9494-e8cb0a295064</onsuccess>
     <resource object="Data - SQL Server" action="Execute" />
   </stage>
   <stage stageid="4a51e619-1a69-4563-9350-0e6f92a5ebb9" name="Results_Updated Data" type="Collection">
@@ -180,16 +180,6 @@
     <display x="135" y="165" />
     <onsuccess>9178d732-3e7b-47cc-968f-7f880efc9021</onsuccess>
     <groupid>a3ca98e1-c218-42fd-9686-49ade3dab573</groupid>
-  </stage>
-  <stage stageid="0fa6735c-7596-4ca8-896e-2c10da6209fd" name="Data - SQL Server::Commit Transaction" type="Action">
-    <loginhibit onsuccess="true" />
-    <display x="135" y="120" />
-    <outputs>
-      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="" />
-      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="" />
-    </outputs>
-    <onsuccess>bcd8badd-c7b2-490a-9494-e8cb0a295064</onsuccess>
-    <resource object="Data - SQL Server" action="Commit Transaction" />
   </stage>
   <stage stageid="b67bae98-ca60-4d47-b7a9-2a096c89a718" name="Data - SQL Server::Close" type="Action">
     <loginhibit onsuccess="true" />
